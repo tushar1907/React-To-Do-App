@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/tushar1907/React-To-Do-App/issues"
   },
-  "homepage": "https://github.com/tushar1907/React-To-Do-App#readme"
+  "homepage": "https://github.com/tushar1907/React-To-Do-App#readme",
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
+  }
 }
