@@ -64,3 +64,20 @@ ul {
 .todo-container:first-of-type {
   border-top: 1px solid #333;
 }
+
+
+*:focus {
+  outline: 0;
+}
+
+.form-elements {
+  display: flex;
+  flex-direction: row;
+  max-width: 800px; 
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.form-elements input {
+  padding: 7px 12px;
+}
