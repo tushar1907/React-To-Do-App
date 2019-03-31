@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../styles.css';
 
-
+//All the class names defined
 const classNames = {
   TODO_ITEM: 'todo-container',
   TODO_CHECKBOX: 'todo-checkbox',
@@ -14,6 +14,7 @@ const uuidv1 = require('uuid/v1');
 
 class App extends React.Component{
 
+    //State defined in the constructor
     constructor() {
       super();
 
@@ -24,7 +25,8 @@ class App extends React.Component{
         uncheckedToDo: 0
       }
     } 
-
+    
+    //Function to create new todos
     newTodo() {
       event.preventDefault();
 
@@ -45,6 +47,7 @@ class App extends React.Component{
         event.target.reset();
     }
 
+    //Function to check new todos
     checkToDo(id) {
       for(var i=0; i<this.state.listofToDo.length; i++) {
         
@@ -52,10 +55,7 @@ class App extends React.Component{
           this.state.listofToDo[i].isChecked = !this.state.listofToDo[i].isChecked;
   
           if(this.state.listofToDo[i].isChecked) {
-            this.setState({
-              listofToDo: this.state.listofToDo,
-              uncheckedToDo: this.state.uncheckedToDo - 1,
-            })
+            this.setState({listofToDo: this.state.listofToDo,uncheckedToDo: this.state.uncheckedToDo - 1})
           } else {
             this.setState({
               listofToDo: this.state.listofToDo,
@@ -68,6 +68,7 @@ class App extends React.Component{
       }    
     }
 
+    //Function to render the todos
     displayToDo() {
       var items;
   
@@ -86,19 +87,14 @@ class App extends React.Component{
       return items;
     }
 
+    //Function to delete todos
     deleteToDo(id) {
       for(var i=0; i<this.state.listofToDo.length; i++) {
         if(this.state.listofToDo[i].id === id) {
           if(this.state.listofToDo[i].isChecked) {
-            this.setState({
-              listofToDo: this.state.listofToDo,
-              totalToDo: this.state.totalToDo - 1
-            })
+            this.setState({listofToDo: this.state.listofToDo,totalToDo: this.state.totalToDo - 1})
           } else {
-            this.setState({
-              listofToDo: this.state.listofToDo,
-              totalToDo: this.state.totalToDo - 1,
-              uncheckedToDo: this.state.uncheckedToDo - 1
+            this.setState({listofToDo: this.state.listofToDo,totalToDo: this.state.totalToDo - 1,uncheckedToDo: this.state.uncheckedToDo - 1
             })
           }              
   
@@ -108,6 +104,7 @@ class App extends React.Component{
       }
     }
 
+    //Render fucntion to day the whole page
     render() {
         const {listofToDo, totalToDo, uncheckedToDo} = this.state;
         return <div className="container center">
