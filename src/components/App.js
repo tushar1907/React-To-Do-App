@@ -45,13 +45,13 @@ class App extends React.Component{
         event.target.reset();
     }
 
-    checkItem(id) {
+    checkToDo(id) {
       for(var i=0; i<this.state.listofToDo.length; i++) {
         
         if(this.state.listofToDo[i].id === id) {
-          this.state.listofToDo[i].checked = !this.state.listofToDo[i].checked;
+          this.state.listofToDo[i].isChecked = !this.state.listofToDo[i].isChecked;
   
-          if(this.state.listofToDo[i].checked) {
+          if(this.state.listofToDo[i].isChecked) {
             this.setState({
               listofToDo: this.state.listofToDo,
               uncheckedToDo: this.state.uncheckedToDo - 1,
@@ -68,6 +68,46 @@ class App extends React.Component{
       }    
     }
 
+    displayToDo() {
+      var items;
+  
+      if(this.state.listofToDo.length > 0) {
+        items = this.state.listofToDo.map(todo => {
+          return <li className={classNames.TODO_ITEM} key={todo.id}>
+          <input type="checkbox" ref="checkItem" className={classNames.TODO_CHECKBOX} onChange={() => this.checkToDo(todo.id)} />
+          <span className={classNames.TODO_TEXT}>{todo.title}</span>
+          <button className={classNames.TODO_DELETE} onClick={() => this.deleteToDo(todo.id)}>DELETE TODO</button>
+          </li>
+        });
+      } else {
+        items = <p className="align-center">Please add todos</p>
+      }
+  
+      return items;
+    }
+
+    deleteToDo(id) {
+      for(var i=0; i<this.state.listofToDo.length; i++) {
+        if(this.state.listofToDo[i].id === id) {
+          if(this.state.listofToDo[i].isChecked) {
+            this.setState({
+              listofToDo: this.state.listofToDo,
+              totalToDo: this.state.totalToDo - 1
+            })
+          } else {
+            this.setState({
+              listofToDo: this.state.listofToDo,
+              totalToDo: this.state.totalToDo - 1,
+              uncheckedToDo: this.state.uncheckedToDo - 1
+            })
+          }              
+  
+          this.state.listofToDo.splice(i, 1);      
+          break;
+        }
+      }
+    }
+
     render() {
         const {listofToDo, totalToDo, uncheckedToDo} = this.state;
         return <div className="container center">
@@ -82,13 +122,7 @@ class App extends React.Component{
                   </form>
                   <ul id="todo-list" className="todo-list">
                       {
-                      listofToDo.map(todo => {
-                        return <li className={classNames.TODO_ITEM} key={todo.id}>
-                        <input type="checkbox" ref="checkItem" className={classNames.TODO_CHECKBOX} onChange={() => this.checkItem(todo.id)} />
-                        <span className={classNames.TODO_TEXT}>{todo.title}</span>
-                        <button className={classNames.TODO_DELETE}>DELETE TODO</button>
-                        </li>
-                      })
+                      this.displayToDo()
                     }
                   </ul>
               </div>
