@@ -21,9 +21,10 @@ npm -v
 Links for reference:
 * [install node.js](https://nodejs.org/en/download/)
 
-2. Further clone this repository and intall all the necessary packages required to run the application.
+2. Further clone this repository and install all the necessary packages required to run the application.
 
 ```sh
+git clone https://github.com/tushar1907/React-To-Do-App.git
 npm install
 ```
 
